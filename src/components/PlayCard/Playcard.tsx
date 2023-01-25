@@ -1,7 +1,7 @@
 import { Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import sha256 from 'crypto-js/sha256'
-import { useState } from 'react'
+import sha1 from 'crypto-js/sha1'
+import { MouseEvent, useState } from 'react'
 import styles from './styles.module.css'
 
 type Props = {
@@ -13,18 +13,19 @@ type Props = {
 
 export function Playcard(props: Props) {
   const [answer, setAnswer] = useState('')
-  const onSubmit = () => {
-    const myAnswerSha = sha256(answer.toLowerCase().trim())
-    if (myAnswerSha.toString() === props.answerSha) {
-      props.incrScore()
-    } else {
-      props.decrLives()
-    }
+  const onSubmit = (e: MouseEvent<any, any>) => {
+    e.preventDefault()
+    const ansSha = sha1(answer.toLowerCase().trim()).toString()
+    console.log(ansSha, props)
+
+    if (ansSha === props.answerSha) props.incrScore()
+    else props.decrLives()
+
     setAnswer('')
   }
 
   return (
-    <div className={styles.card}>
+    <form className={styles.card}>
       <div className={styles.question}>{props.question}</div>
       <br />
       <div className="answer">
@@ -37,10 +38,15 @@ export function Playcard(props: Props) {
       </div>
       <br />
       <div>
-        <Button variant="contained" disableElevation onClick={onSubmit}>
+        <Button
+          type="submit"
+          variant="contained"
+          disableElevation
+          onClick={onSubmit}
+        >
           Submit
         </Button>
       </div>
-    </div>
+    </form>
   )
 }
