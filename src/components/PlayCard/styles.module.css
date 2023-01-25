@@ -1,0 +1,10 @@
+.card {
+  width: 600px;
+}
+
+.card .question {
+  font-size: 120%;
+  margin: 40px 0 0px;
+  font-weight: normal;
+  line-height: 1.4;
+}

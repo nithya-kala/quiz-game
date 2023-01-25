@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import sha256 from 'crypto-js/sha256'
-import { Button } from '@mui/material'
+import { useState } from 'react'
+import styles from './styles.module.css'
 
 type Props = {
   question: string
@@ -19,13 +20,12 @@ export function Playcard(props: Props) {
     } else {
       props.decrLives()
     }
+    setAnswer('')
   }
 
   return (
-    <div style={{ width: 600 }}>
-      <div className="question">
-        <label>Question: {props.question}</label>
-      </div>
+    <div className={styles.card}>
+      <div className={styles.question}>{props.question}</div>
       <br />
       <div className="answer">
         <TextField

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Playcard } from './components/Playcard'
+import { Playcard } from './components/PlayCard/Playcard'
 import './App.css'
+import { ScoreBoard } from './components/ScoreBoard/ScoreBoard'
 
 const API_URL = 'https://eok9ha49itquif.m.pipedream.net'
 
@@ -47,6 +48,7 @@ function App() {
   return (
     <div className="App">
       <h1>Quiz Game</h1>
+      <ScoreBoard scores={scores} lives={lives} />
       <Playcard {...{ question, answerSha, incrScore, decrLives }} />
     </div>
   )
