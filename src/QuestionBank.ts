@@ -7,6 +7,7 @@ export class QuestionBank {
     this.url = apiUrl
   }
 
+  // Fetch the set of questions from API URL
   private async fetchMore() {
     const res = await fetch(this.url)
     const json = await res.json()
@@ -16,6 +17,7 @@ export class QuestionBank {
     }
   }
 
+  // Returns the unique question, else it will fetch the next set of questions from API URL
   public async next(): Promise<[string, string]> {
     while (true) {
       for (const [question, answerSha] of this.questions.entries()) {
@@ -29,6 +31,7 @@ export class QuestionBank {
     }
   }
 
+  // Reset when user clicks play again button
   public reset() {
     this.questions.clear()
     this.shownSet.clear()

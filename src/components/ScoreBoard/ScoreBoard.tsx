@@ -7,6 +7,10 @@ type Props = {
   lives: number
 }
 
+/**
+ * @param props Properties to display the score board
+ * @returns Score board with score and number of lives/chances
+ */
 export const ScoreBoard: FC<Props> = (props) => {
   return (
     <div className={styles.board}>

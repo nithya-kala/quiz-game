@@ -10,6 +10,9 @@ type QAPair = [string, string]
 
 const qBank = new QuestionBank(API_URL)
 
+/**
+ * PlayArea - displays the Playcard and ScoreBoard
+ */
 export function PlayArea() {
   const [qaPair, setQaPair] = useState<QAPair>()
   const [scores, setScores] = useState(0)
@@ -19,14 +22,17 @@ export function PlayArea() {
     qBank.next().then(setQaPair)
   }, [scores, lives])
 
+  // Increments the score when the answer is correct
   const incrScore = useCallback(() => {
     setScores((val) => val + 1)
   }, [])
 
+  // Decrements the number of chances/lives when the answer is wrong
   const decrLives = useCallback(() => {
     setLives((val) => val - 1)
   }, [])
 
+  // Restarting when play again is clicked
   const restart = useCallback(() => {
     qBank.reset()
     setLives(3)
@@ -34,6 +40,7 @@ export function PlayArea() {
     setQaPair(undefined)
   }, [])
 
+  // Loading when the API data is fetched
   if (!qaPair) {
     return (
       <div>
@@ -44,6 +51,7 @@ export function PlayArea() {
     )
   }
 
+  // Displays the final score and play again button - when the number of lives becomes zero
   if (lives === 0) {
     return (
       <div>
@@ -52,7 +60,7 @@ export function PlayArea() {
           Final Score <b>{scores}</b>
         </div>
         <br />
-        <Button variant="contained" onClick={restart}>
+        <Button variant='contained' onClick={restart}>
           Play again
         </Button>
       </div>
@@ -62,7 +70,7 @@ export function PlayArea() {
   const [question, answerSha] = qaPair
 
   return (
-    <div className="App">
+    <div className='App'>
       <h1>Quiz Game</h1>
       <ScoreBoard scores={scores} lives={lives} />
       <Playcard {...{ question, answerSha, incrScore, decrLives }} />

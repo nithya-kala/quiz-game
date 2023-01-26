@@ -11,8 +11,14 @@ type Props = {
   decrLives(): void
 }
 
+/**
+ * @param props properties to display the play area
+ * @returns Play area with question, answer and submit button
+ */
 export function Playcard(props: Props) {
   const [answer, setAnswer] = useState('')
+
+  // On Submitting, the answer will be verified and score/lives will be updated accordingly
   const onSubmit = (e: MouseEvent<any, any>) => {
     e.preventDefault()
     const ansSha = sha1(answer.toLowerCase().trim()).toString()
@@ -27,9 +33,9 @@ export function Playcard(props: Props) {
     <form className={styles.card}>
       <div className={styles.question}>{props.question}</div>
       <br />
-      <div className="answer">
+      <div className='answer'>
         <TextField
-          label="Answer"
+          label='Answer'
           fullWidth
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
@@ -38,8 +44,8 @@ export function Playcard(props: Props) {
       <br />
       <div>
         <Button
-          type="submit"
-          variant="contained"
+          type='submit'
+          variant='contained'
           disableElevation
           onClick={onSubmit}
         >

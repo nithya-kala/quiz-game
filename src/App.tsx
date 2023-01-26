@@ -7,6 +7,7 @@ import './App.css'
 export default function App() {
   const [mode, setMode] = React.useState<'light' | 'dark'>('light')
 
+  //Toggles between day and night mode
   const toggleColorMode = () => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'))
   }
