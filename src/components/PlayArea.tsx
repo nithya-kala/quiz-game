@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { QuestionBank } from '../QuestionBank'
 import { Playcard } from './PlayCard/Playcard'
 import { ScoreBoard } from './ScoreBoard/ScoreBoard'
@@ -19,20 +19,20 @@ export function PlayArea() {
     qBank.next().then(setQaPair)
   }, [scores, lives])
 
-  const incrScore = () => {
-    setScores(scores + 1)
-  }
+  const incrScore = useCallback(() => {
+    setScores((val) => val + 1)
+  }, [])
 
-  const decrLives = () => {
-    setLives(lives - 1)
-  }
+  const decrLives = useCallback(() => {
+    setLives((val) => val - 1)
+  }, [])
 
-  const restart = () => {
+  const restart = useCallback(() => {
     qBank.reset()
     setLives(3)
     setScores(0)
     setQaPair(undefined)
-  }
+  }, [])
 
   if (!qaPair) {
     return (

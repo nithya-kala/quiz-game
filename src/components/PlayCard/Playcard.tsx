@@ -16,7 +16,6 @@ export function Playcard(props: Props) {
   const onSubmit = (e: MouseEvent<any, any>) => {
     e.preventDefault()
     const ansSha = sha1(answer.toLowerCase().trim()).toString()
-    console.log(ansSha, props)
 
     if (ansSha === props.answerSha) props.incrScore()
     else props.decrLives()

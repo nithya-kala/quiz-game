@@ -17,8 +17,6 @@ export class QuestionBank {
   }
 
   public async next(): Promise<[string, string]> {
-    console.log('next')
-
     while (true) {
       for (const [question, answerSha] of this.questions.entries()) {
         if (!this.shownSet.has(question)) {
